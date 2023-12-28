@@ -14,29 +14,47 @@
 
 ### 1. 浮点训练
 
-`conda activate linger-env`
+```bash
+conda activate linger-env
+```
 
-`python run.py`
+```bash
+python run.py
+```
 
 ### 2. 量化训练和导出
 
-`python run.py`
+```bash
+python run.py
+```
 
-`python model_trans.py`
+```bash
+python model_trans.py
+```
 
 ### 3. 模型分析和打包
 
-`conda activate thinker-env`
+```bash
+conda activate thinker-env
+```
 
-`tpacker -g encoder.onnx -d True -c en_len=32 -o encoder.bin`
+```bash
+tpacker -g encoder.onnx -d True -c en_len=32 -o encoder.bin
+```
 
-`tpacker -g decoder.onnx -d True -c de_len=32,memory_len=32 -o decoder.bin`
+```bash
+tpacker -g decoder.onnx -d True -c de_len=32,memory_len=32 -o decoder.bin
+```
 
 ### 4. 推理执行
 
-`bash scripts/x86_linux.sh`
+```bash
+bash scripts/x86_linux.sh
+```
 
-`bin/test_thinker demo/test_transformer/input.txt demo/test_transformer/encoder.bin demo/test_transformer/decoder.bin demo/test_transformer/output.bin`
+```bash
+bin/test_thinker demo/test_transformer/input.txt demo/test_transformer/encoder.bin demo/test_transformer/decoder.bin demo/test_transformer/output.bin
+```
 
 ### 5. 编译和烧录
 
