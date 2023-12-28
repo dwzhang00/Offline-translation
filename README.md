@@ -1,39 +1,46 @@
-## 论文来源
+# Offline_translation
 
-[Attention is all you need](https://arxiv.org/abs/1706.03762)
+## 介绍
+
+本项目基于transformer模型，使用聆思科技开源的AI生态工具链LNN(ListenAI Neural Network)，完成中英翻译任务的训练、量化、仿真调试等一系列步骤，并实现在聆思CSK6-MIX芯片上进行推理。
+
+## 环境配置
+
+训练环境配置：https://github.com/LISTENAI/linger/blob/main/doc/tutorial/install.md
+
+推理环境配置：https://github.com/LISTENAI/thinker/blob/main/thinker/docs/tutorial/install.md
+
+## 主要流程
+
+### 1. 浮点训练
+
+`conda activate linger-env`
+
+`python run.py`
+
+### 2. 量化训练和导出
+
+`python run.py`
+
+`python model_trans.py`
+
+### 3. 模型分析和打包
+
+`conda activate thinker-env`
+
+`tpacker -g encoder.onnx -d True -c en_len=32 -o encoder.bin`
+
+`tpacker -g decoder.onnx -d True -c de_len=32,memory_len=32 -o decoder.bin`
+
+### 4. 推理执行
+
+`bash scripts/x86_linux.sh`
+
+`bin/test_thinker demo/test_transformer/input.txt demo/test_transformer/encoder.bin demo/test_transformer/decoder.bin demo/test_transformer/output.bin`
+
+### 5. 编译和烧录
 
 ## 代码参考
 
-[哈弗 nlp](http://nlp.seas.harvard.edu/2018/04/03/attention.html)
+https://github.com/hinesboy/transformer-simple
 
-## 项目结构
-
-- data `源数据目录`
-- log  `日志存放目录 （每次预测产生一个 log-timestamp.txt）`
-- save `模型存放目录`
-- model `模型目录`
-    - attention.py
-    - embedding.py
-    - encoder.py
-    - decoder.py
-    - generator.py
-    - sublayer.py
-    - position_wise_feedforward.py
-    - transformer.py
-- lib  `损失函数、优化器等存放位置`
-    - criterion.py `损失函数`
-    - optimizer.py `优化器`
-    - loss.py `优化器 + 损失函数封装类`
-- evaluate.py `预测.py`
-- train.py `训练.py`
-- parser.py `参数.py`
-- utils.py `工具类.py`
-- run.py `入口文件.py`
-- README.md `readme`
-
-
-## 训练
-`python3 run.py`
-
-## 预测 (前提：训练过)
-`python3 run.py --type evaluate`
