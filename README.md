@@ -68,7 +68,7 @@ bash scripts/x86_linux.sh
 bin/test_thinker demo/test_transformer/input.txt demo/test_transformer/encoder.bin demo/test_transformer/decoder.bin demo/test_transformer/output.bin
 ```
 
-![image-20231229102600361](C:\Users\dwzhang12\AppData\Roaming\Typora\typora-user-images\image-20231229102600361.png)
+![result](./result.png)
 
 ### 5. 编译和烧录
 
