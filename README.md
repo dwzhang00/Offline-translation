@@ -37,7 +37,7 @@ python run.py
 使用linger的模型转换工具，将训练得到的pth模型转换为onnx模型，并支持动态维度的输入。
 
 ```bash
-python model_trans.py
+python tools/model_trans.py
 ```
 
 ### 3. 模型分析和打包
